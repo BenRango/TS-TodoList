@@ -45,8 +45,10 @@ export class TaskController {
             res.status(200).json({message: "Edition succed", task})
             return
         } catch (error) {
+            console.log({payload: req.body})
             if (error instanceof Error && error.name === "ValidationError") {
                 const errors = Object.values((error as any).errors).map((err: any) => err.properties)
+                console.log({error})
                 res.status(400).json({ message: "Erreur de validation.", errors })
                 return
             }
@@ -63,7 +65,7 @@ export class TaskController {
                 return
             }
             await Task.deleteOne(task)
-            res.status(204)
+            res.status(204).send()
         } catch (error) {
             console.log(error)
             res.status(500).json(error)

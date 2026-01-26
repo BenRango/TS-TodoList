@@ -1,10 +1,11 @@
 {
   "type": "module",
   "scripts": {
-    "build": "tsc  -p ./tsconfig.json  ",
-    "backend:dev": "tsx src/index.ts",
-    "backend:prod": "tsx dist/index.js",
-    "production": "node --loader tsconfig-paths/register.js dist/index.js"
+    "build": "tsc  -p ./tsconfig.json && tsc-alias",
+    "backend:dev": "nodemon -x tsx src/index.ts",
+    "backend:build": "tsc",
+    "backend:deploy": " npm run backend:build && tsc-alias",
+    "backend:start": "node dist/index.js"
   },
   "_moduleAliases": {
     "@routes": "dist/routes",
@@ -18,6 +19,7 @@
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "mongoose": "^8.19.2",
+    "tsc-alias": "^1.8.16",
     "tsconfig-paths": "^4.2.0",
     "tsx": "^4.20.6"
   },
@@ -25,6 +27,7 @@
     "@types/cors": "^2.8.19",
     "cors": "^2.8.5",
     "module-alias": "^2.2.3",
+    "nodemon": "^3.1.11",
     "socket.io": "^4.8.1"
   }
 }

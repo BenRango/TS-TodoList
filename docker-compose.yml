@@ -1,0 +1,18 @@
+services:
+  todo-app:
+    container_name: todo-app
+    image: benrango/todo-app
+    restart: always
+    ports:
+      - 4200:4000
+  todo-server:
+    container_name: todo-server
+    image: benrango/todo-server:latest
+    restart: always
+    ports:
+      - 8808:8000
+    environment:
+      - PORT=8000
+      - DB_URL=mongodb://localhost:27017/todo
+      - CLUSTER_URL=mongodb+srv://srangoelie:MOhm5GqCX77XL7UZ@cluster0.hltet.mongodb.net/todo
+
