@@ -7,20 +7,14 @@ import mongoose from 'mongoose'
 import cors from "cors"
 import { CLUSTER_URL, DB_URL, isRunningInDocker } from './env.mjs'
 import { Server } from 'socket.io'
-
+import pino from "pino"
+import type { TaskComponent } from './interfaces/interfaces.js'
+import router from '@routes/index.routes.js'
+export const logger = pino()
 
 const app : Application = express()
 
-interface TaskComponent{
-    _id: String,
-    label ?: String 
-    state ?: boolean
-    createdAt ?: Date
-    updatedAt : Date | null 
-    deadline?: Date   
-    completedAt : Date | null 
-    position ?: number 
-}
+
 const url = isRunningInDocker? CLUSTER_URL: DB_URL
 app.use(cors({
     origin: '*'
@@ -28,7 +22,7 @@ app.use(cors({
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-app.use('/todo', (await import('@routes/index.routes.js')).default)
+app.use('/todo', router)
 const server = http.createServer(app)
 
 server.on('error', (err: any) => {

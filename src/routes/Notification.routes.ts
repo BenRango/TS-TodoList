@@ -3,10 +3,10 @@ import 'module-alias/register.js'
 import { Router } from "express";
 import { NotificationController } from '@controllers/Notification.Controller.js';
 
-const router = Router()
+const notifRouter = Router()
 
-router.get('/', NotificationController.fetch)
-router.post('/', NotificationController.create)
-router.delete("/:id", NotificationController.remove)
+notifRouter.get('/', NotificationController.fetch)
+notifRouter.post('/', NotificationController.create)
+notifRouter.delete("/:id", NotificationController.remove)
 
-export default router;
+export default notifRouter;
