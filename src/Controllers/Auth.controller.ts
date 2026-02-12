@@ -30,7 +30,7 @@ export class AuthController {
             delete userResponse.password; 
 
             const token = jwt.sign(
-                { id: user._id, email: user.email }, 
+                { id: user._id, email: user.email, username: user.username }, 
                 JWT_SECRET_KEY, 
                 { expiresIn: "7d" }
             );
@@ -59,7 +59,7 @@ export class AuthController {
             }
 
             const token = jwt.sign(
-                { id: targetUser._id, email: targetUser.email }, 
+                { id: targetUser._id, email: targetUser.email, username: targetUser.username }, 
                 JWT_SECRET_KEY, 
                 { expiresIn: "7d" }
             );
