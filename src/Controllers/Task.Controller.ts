@@ -2,11 +2,14 @@ import 'module-alias/register.js'
 
 import { Task } from "@models/Task.js";
 import type { Request, Response } from "express";
+import type { UserInterface } from '@models/User.js';
 
 export class TaskController {
     static getTasks = async (req: Request, res: Response): Promise<void> =>{
         try{
-            const tasks = await Task.find()
+            const tasks = await Task.find({
+                author : req.user?._id
+            })
             res.status(200).json(tasks);
             return 
         } catch (error) {
@@ -20,6 +23,7 @@ export class TaskController {
         try {
             const task = new Task()
             Object.assign(task, req.body as {description : string, label : string, deadline : Date})
+            task.author = req.user!
             await task.save()
             res.status(201).json(task)
         } catch (error) {

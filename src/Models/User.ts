@@ -1,10 +1,10 @@
 import mongoose, { Schema } from "mongoose";
-interface UserInterface{
+export interface UserInterface{
     _id?: string;
     username: string;
     email: string;
     password?: string;
-    toPayload() : ()=> {
+    toPayload ?: ()=> {
         id: string
         username: string
         email: string

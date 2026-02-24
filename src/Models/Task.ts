@@ -1,9 +1,9 @@
 import mongoose, { Document, Schema } from 'mongoose';
-import { User } from './User.js';
+import { User, type UserInterface } from './User.js';
 
 export interface ITask extends Document {
     label: string;
-    author : string | typeof User
+    author : string | UserInterface
     description?: string;
     completedAt?: Date;
     deadline ?: Date
