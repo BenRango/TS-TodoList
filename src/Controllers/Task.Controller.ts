@@ -9,7 +9,7 @@ export class TaskController {
         try{
             const tasks = await Task.find({
                 author : req.user?._id
-            })
+            }).sort({createdAt: -1})
             res.status(200).json(tasks);
             return 
         } catch (error) {
